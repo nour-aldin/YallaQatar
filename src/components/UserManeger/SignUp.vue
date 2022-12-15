@@ -3,8 +3,8 @@
     <img class="bg" src="@/assets/Icons/signup.webp" alt="background" />
     <b-row>
       <b-col></b-col>
-      <b-col>
-        <div class="Form">
+      <b-col class="hm">
+        <div class="Form form1">
           <b-form @submit.prevent="onSubmit" @reset="onReset">
             <b-form-group
               id="input-group-1"
@@ -157,9 +157,12 @@ export default {
 }
 .Form {
   font-family: "Poppins", sans-serif;
-  color: white;
+  color: rgba(0, 0, 0, 0.678);
   margin: 10rem 1.5rem;
   text-align: center;
+}
+.form1 {
+  margin: 5rem 1.5rem;
 }
 .btn {
   margin: 25px 0;
@@ -169,5 +172,11 @@ export default {
   font-size: 0.8rem;
   line-height: 1.5;
   color: gray;
+}
+.hm {
+  position: relative;
+  background: #c0deff;
+  top: 40px;
+  border-radius: 25px;
 }
 </style>

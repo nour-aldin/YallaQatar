@@ -3,7 +3,7 @@
     <img class="bg" src="@/assets/Icons/signup.webp" alt="" />
     <b-row>
       <b-col></b-col>
-      <b-col>
+      <b-col class="hm">
         <div class="Form">
           <b-form @submit.prevent="onSubmit" @reset="onReset">
             <b-form-group
@@ -92,15 +92,22 @@ export default {
 
 <style scoped>
 .Form {
-  margin-top: 300px;
+  margin-top: 100px;
+  color: rgba(0, 0, 0, 0.678);
 }
 .privacy {
   font-size: 0.8rem;
   line-height: 1.5;
-  color: gray;
+  color: rgba(0, 0, 0, 0.507);
 }
 .newUser {
   font-size: 1.2rem;
   text-decoration: none;
+}
+.hm {
+  position: relative;
+  background: #c0deff;
+  top: 100px;
+  border-radius: 25px;
 }
 </style>
