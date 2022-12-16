@@ -30,6 +30,7 @@
                 :state="validation"
                 id="feedback-user"
                 placeholder="Password"
+                type="password"
               >
               </b-form-input>
               <b-form-invalid-feedback :state="validation">
@@ -66,15 +67,18 @@ export default {
       form: {
         email: "",
         password: "",
-        background: "@/assets/Icons/signup.webp",
       },
+      background: "@/assets/Icons/signup.webp",
     };
   },
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      alert(JSON.stringify(this.form));
+      this.$store
+        .dispatch("login", { ...this.form })
+        .then(() => this.$router.push("/home"));
     },
+    //alert(JSON.stringify(this.form));
     onReset(event) {
       event.preventDefault();
       // Reset our form values
@@ -95,15 +99,18 @@ export default {
   margin-top: 100px;
   color: rgba(0, 0, 0, 0.678);
 }
+
 .privacy {
   font-size: 0.8rem;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.507);
 }
+
 .newUser {
   font-size: 1.2rem;
   text-decoration: none;
 }
+
 .hm {
   position: relative;
   background: #c0deff;

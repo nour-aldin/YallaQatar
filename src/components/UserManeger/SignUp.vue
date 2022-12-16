@@ -53,6 +53,7 @@
                 :state="validation"
                 id="feedback-user"
                 placeholder="Password"
+                type="password"
               >
               </b-form-input>
               <b-form-invalid-feedback :state="validation">
