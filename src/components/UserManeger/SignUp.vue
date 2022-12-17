@@ -7,6 +7,18 @@
         <div class="Form form1">
           <b-form @submit.prevent="onSubmit" @reset="onReset">
             <b-form-group
+              id="input-group-7"
+              label="User Name"
+              label-for="input-7"
+            >
+              <b-form-input
+                id="input-7"
+                v-model="form.userName"
+                placeholder="User Name"
+                required
+              ></b-form-input>
+            </b-form-group>
+            <b-form-group
               id="input-group-1"
               label="First Name"
               label-for="input-1"
@@ -76,6 +88,18 @@
                 type="date"
               ></b-form-input>
             </b-form-group>
+            <b-form-group
+              id="input-group-8"
+              label="Nationality"
+              label-for="input-8"
+            >
+              <b-form-input
+                id="input-7"
+                v-model="form.nationality"
+                placeholder="Your Nationality"
+                required
+              ></b-form-input>
+            </b-form-group>
             <b-form-group id="input-group-6" label="Gender" label-for="input-6">
               <b-form-select
                 id="input-6"
@@ -107,22 +131,26 @@ export default {
   data: function () {
     return {
       form: {
+        userName: "",
         firstName: "",
         lastName: "",
         email: "",
         password: "",
         birthDate: "",
         gender: null,
+        nationality: "",
       },
       msg: "This is sign in",
-      genderList: [{ text: "Your Gender", value: null }, "Male", "Femal"],
+      genderList: [{ text: "Your Gender", value: null }, "Male", "Female"],
       background: require("@/assets/Icons/signup.webp"),
     };
   },
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      alert(JSON.stringify(this.form));
+      this.$store
+        .dispatch("signUp", { ...this.form })
+        .then(() => this.$router.push("/home"));
     },
     onReset(event) {
       event.preventDefault();

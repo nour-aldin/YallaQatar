@@ -8,14 +8,14 @@
           <b-form @submit.prevent="onSubmit" @reset="onReset">
             <b-form-group
               id="input-group-1"
-              label="Email address"
+              label="User Name"
               label-for="input-1"
             >
               <b-form-input
                 id="input-1"
-                v-model="form.email"
-                type="email"
-                placeholder="Enter email"
+                v-model="user.userName"
+                type="text"
+                placeholder="User Name"
                 required
               ></b-form-input>
             </b-form-group>
@@ -26,7 +26,7 @@
               label-for="input-2"
             >
               <b-form-input
-                v-model="form.password"
+                v-model="user.password"
                 :state="validation"
                 id="feedback-user"
                 placeholder="Password"
@@ -64,8 +64,8 @@ export default {
   name: "SignIn",
   data: () => {
     return {
-      form: {
-        email: "",
+      user: {
+        userName: "",
         password: "",
       },
       background: "@/assets/Icons/signup.webp",
@@ -74,21 +74,28 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      this.$store
-        .dispatch("login", { ...this.form })
-        .then(() => this.$router.push("/home"));
+      let userName = this.user.userName;
+      let password = this.user.password;
+      this.$store.dispatch("login", { userName, password }).then(() => {
+        console.log("AAAAAAAAAAAAA", this.$store.state.user.role);
+        if (this.$store.state.user.role == "admin") {
+          this.$router.push("/admin");
+        } else {
+          this.$router.push("/home");
+        }
+      });
     },
     //alert(JSON.stringify(this.form));
     onReset(event) {
       event.preventDefault();
       // Reset our form values
-      this.form.email = "";
-      this.form.password = "";
+      this.user.userName = "";
+      this.user.password = "";
     },
   },
   computed: {
     validation() {
-      return this.form.password.length > 4 && this.form.password.length < 13;
+      return this.user.password.length > 4 && this.user.password.length < 13;
     },
   },
 };
