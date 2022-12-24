@@ -141,7 +141,7 @@ export default {
         nationality: "",
       },
       msg: "This is sign in",
-      genderList: [{ text: "Your Gender", value: null }, "Male", "Female"],
+      genderList: [{ text: "Your Gender", value: null }, "male", "female"],
       background: require("@/assets/Icons/signup.webp"),
     };
   },

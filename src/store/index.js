@@ -31,7 +31,7 @@ export default new Vuex.Store({
     auth_success(state, token, user) {
       state.status = "success";
       state.token = token;
-      state.user = user;
+      // state.user = user;
     },
     // auth_init(state, user) {
     //   state.user = user;
@@ -51,15 +51,13 @@ export default new Vuex.Store({
             password: user.password,
           })
           .then((res) => {
-            console.log("userbeg =", user);
-            this.state.user.role = res.data.user.role;
-            console.log("store role", this.state.user.role);
-            console.log(res);
             const token = res.data.token;
             localStorage.setItem("token", token);
-            axios.default.headers.common["Authorization"] = token;
+            axios.defaults.headers.common["Authorization"] = token;
+            console.table("res.user =", res.data.user);
             commit("auth_success", token, user);
-            console.log("userend =", user);
+            this.state.user = res.data.user;
+            console.table("state.user =", this.state.user);
             resolve(res);
           })
           .catch((err) => {
@@ -71,10 +69,20 @@ export default new Vuex.Store({
       });
     },
     async signUp({ commit }, user) {
+      console.table(user);
       return new Promise((resolve, reject) => {
         this.commit("auth_request");
         axios
           .post("http://localhost:5000/api/auth/register", {
+            // userName: user.userName,
+            // password: user.password,
+            // firstName: user.firstName,
+            // lastName: user.lastName,
+            // birthDate: user.birthDate,
+            // gender: user.gender,
+            // nationality: user.nationality,
+            // emailAddress: user.email,
+            // role: "fan",
             userName: user.userName,
             password: user.password,
             firstName: user.firstName,
@@ -86,10 +94,10 @@ export default new Vuex.Store({
             role: "fan",
           })
           .then((res) => {
-            const token = res.data.res.token;
-            const user = res.data.res.data.user;
+            const token = res.data.token;
+            const user = res.data.user;
             localStorage.setItem("token", token);
-            axios.default.headers.common["Authorization"] = token;
+            axios.defaults.headers.common["Authorization"] = token;
             commit("auth_success", token, user);
             resolve(res);
           })

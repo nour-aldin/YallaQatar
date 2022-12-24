@@ -1,3 +1,4 @@
+<!-- eslint-disable no-undef -->
 <template>
   <b-container>
     <img class="bg" src="@/assets/Icons/signup.webp" alt="" />
@@ -77,7 +78,6 @@ export default {
       let userName = this.user.userName;
       let password = this.user.password;
       this.$store.dispatch("login", { userName, password }).then(() => {
-        console.log("AAAAAAAAAAAAA", this.$store.state.user.role);
         if (this.$store.state.user.role == "admin") {
           this.$router.push("/admin");
         } else {
@@ -85,7 +85,6 @@ export default {
         }
       });
     },
-    //alert(JSON.stringify(this.form));
     onReset(event) {
       event.preventDefault();
       // Reset our form values
