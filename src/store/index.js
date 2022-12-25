@@ -18,6 +18,7 @@ export default new Vuex.Store({
       birthDate: "",
       gender: null,
       nationality: "",
+      approved: false,
     },
   },
   getters: {
@@ -51,6 +52,7 @@ export default new Vuex.Store({
             password: user.password,
           })
           .then((res) => {
+            console.log(res);
             const token = res.data.token;
             localStorage.setItem("token", token);
             axios.defaults.headers.common["Authorization"] = token;
@@ -74,15 +76,6 @@ export default new Vuex.Store({
         this.commit("auth_request");
         axios
           .post("http://localhost:5000/api/auth/register", {
-            // userName: user.userName,
-            // password: user.password,
-            // firstName: user.firstName,
-            // lastName: user.lastName,
-            // birthDate: user.birthDate,
-            // gender: user.gender,
-            // nationality: user.nationality,
-            // emailAddress: user.email,
-            // role: "fan",
             userName: user.userName,
             password: user.password,
             firstName: user.firstName,
@@ -91,7 +84,7 @@ export default new Vuex.Store({
             gender: user.gender,
             nationality: user.nationality,
             emailAddress: user.email,
-            role: "fan",
+            role: user.role,
           })
           .then((res) => {
             const token = res.data.token;

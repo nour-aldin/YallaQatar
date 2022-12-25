@@ -12,13 +12,19 @@
     </b-navbar-brand>
 
     <!-- NavBar Items -->
-    <b-navbar-nav class="ms-auto">
+    <b-navbar-nav class="ms-auto" v-if="type == 'Home'">
       <b-nav-item href="/" class="navItems">Home</b-nav-item>
       <b-nav-item href="#" class="navItems">Groups</b-nav-item>
       <b-nav-item href="#" class="navItems">Matches</b-nav-item>
       <b-nav-item href="#" class="navItems">History</b-nav-item>
       <b-nav-item href="#" class="navItems">Booking</b-nav-item>
       <b-nav-item href="/signin" class="navItems">Sign in</b-nav-item>
+    </b-navbar-nav>
+    <b-navbar-nav class="ms-auto" v-else-if="type == 'Manager'">
+      <b-nav-item href="/" class="navItems">Home</b-nav-item>
+      <b-nav-item href="/creatematch" class="navItems">Create Match</b-nav-item>
+      <b-nav-item href="#" class="navItems">Edit Match</b-nav-item>
+      <b-nav-item href="#" class="navItems">History</b-nav-item>
     </b-navbar-nav>
   </b-navbar>
 </template>
@@ -31,6 +37,7 @@ export default {
       worldCupIcon: require("@/assets/Icons/2022-fifa-world-cup-logo.png"),
     };
   },
+  props: ["type"],
 };
 </script>
 <style scoped>

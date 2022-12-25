@@ -77,13 +77,22 @@ export default {
       event.preventDefault();
       let userName = this.user.userName;
       let password = this.user.password;
-      this.$store.dispatch("login", { userName, password }).then(() => {
-        if (this.$store.state.user.role == "admin") {
-          this.$router.push("/admin");
-        } else {
-          this.$router.push("/home");
-        }
-      });
+      this.$store
+        .dispatch("login", { userName, password })
+        .then(() => {
+          const ROLE = this.$store.state.user.role;
+          const Approved = this.$store.state.user.approved;
+          if (ROLE == "admin") {
+            this.$router.push("/admin");
+          } else if (ROLE == "manager" && Approved) {
+            this.$router.push("/manager");
+          } else {
+            this.$router.push("/home");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     onReset(event) {
       event.preventDefault();

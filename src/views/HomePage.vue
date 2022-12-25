@@ -1,6 +1,6 @@
 <template>
-  <div :class="{ change_color: scrollPosition > 50}">
-    <NavBar />
+  <div :class="{ change_color: scrollPosition > 50 }">
+    <NavBar type="Home" />
     <img class="bg" src="@/assets/Icons/background.jpg" alt="" />
     <MatchCard :matches="this.matches" class="s" />
   </div>
@@ -14,10 +14,15 @@ import axios from "axios";
 export default {
   mounted() {
     window.addEventListener("scroll", this.updateScroll);
-    axios.get("http://localhost:5000/api/matches").then((res) => {
-      this.matches = res.data;
-      console.log(res);
-    });
+    axios
+      .get("http://localhost:5000/api/matches")
+      .then((res) => {
+        this.matches = res.data;
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
   beforeMount() {
     window.addEventListener("scroll", this.handleScroll);
@@ -46,8 +51,7 @@ export default {
   overflow-y: scroll;
 }
 .change_color {
-  background-color: #E5E5CB;
+  background-color: #e5e5cb;
   transition: background-color 2s ease;
 }
-
 </style>

@@ -108,6 +108,14 @@
                 required
               ></b-form-select>
             </b-form-group>
+            <b-form-group id="input-group-7" label="Role" label-for="input-7">
+              <b-form-select
+                id="input-7"
+                v-model="form.role"
+                :options="roleList"
+                required
+              ></b-form-select>
+            </b-form-group>
 
             <b-button class="btn" type="submit" variant="success"
               >Sign up</b-button
@@ -139,9 +147,11 @@ export default {
         birthDate: "",
         gender: null,
         nationality: "",
+        role: null,
       },
       msg: "This is sign in",
       genderList: [{ text: "Your Gender", value: null }, "male", "female"],
+      roleList: [{ text: "Your Role", value: null }, "fan", "manager"],
       background: require("@/assets/Icons/signup.webp"),
     };
   },
@@ -161,6 +171,7 @@ export default {
       this.form.password = "";
       this.form.birthDate = "";
       this.form.gender = null;
+      this.form.role = null;
     },
   },
   computed: {
