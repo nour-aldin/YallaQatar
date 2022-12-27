@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavBar type="Manager" />
+    <NavBar type="Manager" :user="this.user" />
   </div>
 </template>
 
@@ -8,12 +8,17 @@
 // @ is an alias to /src
 import NavBar from "../UI/NavBar.vue";
 export default {
+  mounted() {
+    this.user = this.$store.state.user;
+  },
   name: "ManagerPage",
   components: {
     NavBar,
   },
   data: () => {
-    return {};
+    return {
+      user: [],
+    };
   },
   methods: {},
 };

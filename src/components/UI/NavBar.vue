@@ -7,7 +7,10 @@
   <b-navbar type="dark" variant="dark" class="navBar">
 
     <!-- NavBar Icon -->
-    <b-navbar-brand href="/" class="navBar">
+    <b-navbar-brand href="/" class="navBar" v-if="type == 'Home'">
+      <img :src="worldCupIcon" alt="Icon" class="logo-icon" />
+    </b-navbar-brand>
+    <b-navbar-brand href="/manager" class="navBar" v-if="type == 'Manager'">
       <img :src="worldCupIcon" alt="Icon" class="logo-icon" />
     </b-navbar-brand>
 
@@ -21,10 +24,12 @@
       <b-nav-item href="/signin" class="navItems">Sign in</b-nav-item>
     </b-navbar-nav>
     <b-navbar-nav class="ms-auto" v-else-if="type == 'Manager'">
-      <b-nav-item href="/" class="navItems">Home</b-nav-item>
-      <b-nav-item href="/creatematch" class="navItems">Create Match</b-nav-item>
-      <b-nav-item href="#" class="navItems">Edit Match</b-nav-item>
-      <b-nav-item href="#" class="navItems">History</b-nav-item>
+      <b-nav-item to="/manager" class="navItems">Home</b-nav-item>
+      <!-- <router-link to="/creatematch"> -->
+      <b-nav-item to="/creatematch">Create Match</b-nav-item>
+    <!-- </router-link> -->
+      <b-nav-item to="/matchCard" class="navItems">Matches</b-nav-item>
+      <b-nav-item to="/createstadium" class="navItems">Edit Match</b-nav-item>
     </b-navbar-nav>
   </b-navbar>
 </template>
@@ -37,7 +42,7 @@ export default {
       worldCupIcon: require("@/assets/Icons/2022-fifa-world-cup-logo.png"),
     };
   },
-  props: ["type"],
+  props: ["type", "user"],
 };
 </script>
 <style scoped>

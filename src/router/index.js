@@ -6,6 +6,8 @@ import SignIn from "@/components/UserManeger/SignIn.vue";
 import Admin from "@/components/Pages/admin.vue";
 import Manager from "@/components/Pages/Manager.vue";
 import CreateMatch from "@/components/UI/ManagerCreateMatch.vue";
+import MatchCard from "@/components/UI/MatchCard.vue";
+import CreateStadium from "@/components/UI/CreateStadium.vue";
 
 Vue.use(VueRouter);
 
@@ -39,6 +41,16 @@ const routes = [
     path: "/creatematch",
     name: "creatematch",
     component: CreateMatch,
+  },
+  {
+    path: "/matchCard",
+    name: "matchcard",
+    component: MatchCard,
+  },
+  {
+    path: "/createstadium",
+    name: "createstadium",
+    component: CreateStadium,
   },
 ];
 
