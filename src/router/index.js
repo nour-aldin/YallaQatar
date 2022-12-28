@@ -11,6 +11,7 @@ import CreateStadium from "@/components/Stadium/CreateStadium.vue";
 import EditMatch from "@/components/Match/EditMatch.vue";
 import Fan from "@/components/User/Fan/Fan.vue";
 import EditDataUser from "@/components/User/Fan/EditDataUser.vue";
+import SeatDetails from "@/components/Reservation/SeatDetails.vue";
 
 Vue.use(VueRouter);
 
@@ -70,6 +71,12 @@ const routes = [
     path: "/editdatauser",
     name: "EditDataUser",
     component: EditDataUser,
+  },
+  {
+    path: "/seatDetails",
+    name: "SeatDetails",
+    component: SeatDetails,
+    props: true,
   },
 ];
 

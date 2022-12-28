@@ -14,7 +14,6 @@
         <b-nav-item href="/signin" class="navItems">Sign in</b-nav-item>
       </b-navbar-nav>
     </b-navbar>
-
     <!-- NavBar Manager -->
     <b-navbar
       type="light"
@@ -119,7 +118,7 @@ export default {
   components: { MatchCard },
 };
 </script>
-<style scoped>
+<style>
 /* * {
   margin: 0px !important;
 } */

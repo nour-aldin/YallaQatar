@@ -23,16 +23,16 @@
             <p>VS</p>
           </b-row>
           <b-row>
-            <router-link
-              v-if="type == 'Manager'"
+            <keep-alive v-if="type == 'Manager'"><router-link
+              
               :to="{ name: 'editmatch', params: { match } }"
             >
               Edit Match
-            </router-link>
+            </router-link></keep-alive>
 
-            <router-link v-else :to="{ name: 'editmatch', params: { match } }">
-              Reseve a ticket
-            </router-link>
+            <keep-alive v-else><router-link  :to="{ name: 'SeatDetails', params: { match } }">
+              Match details
+            </router-link></keep-alive>
           </b-row>
         </b-col>
 
