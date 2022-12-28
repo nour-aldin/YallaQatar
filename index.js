@@ -52,7 +52,6 @@ export default new Vuex.Store({
             password: user.password,
           })
           .then((res) => {
-            console.log(res);
             const token = res.data.token;
             localStorage.setItem("token", token);
             axios.defaults.headers.common["Authorization"] = token;
@@ -63,7 +62,6 @@ export default new Vuex.Store({
             resolve(res);
           })
           .catch((err) => {
-            console.log(err);
             commit("auth_error");
             localStorage.removeItem("token");
             reject(err);

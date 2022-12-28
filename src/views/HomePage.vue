@@ -17,11 +17,10 @@ export default {
     axios
       .get("http://localhost:5000/api/matches")
       .then((res) => {
-        this.matches = res.data;
-        console.log(res);
+        this.matches = res.data;;
       })
       .catch((err) => {
-        console.log(err);
+        alert(err.message);
       });
   },
   beforeMount() {

@@ -58,7 +58,6 @@ export default {
   },
   methods: {
     Submit() {
-      console.log(this.stadium);
       if (
         !this.stadium.name ||
         this.stadium.row == 0 ||
@@ -68,7 +67,6 @@ export default {
       } else {
         const URL = "http://localhost:5000/api/stadiums";
         const TOKEN = this.$store.state.token;
-        console.log(TOKEN);
         axios
           .post(
             URL,
@@ -109,7 +107,6 @@ export default {
 form {
   margin: 100px auto;
   text-align: center;
-  font-family: "Poppins", sans-serif;
 }
 .Input {
   margin: 25px 0 !important;

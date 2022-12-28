@@ -29,6 +29,10 @@
             >
               Edit Match
             </router-link>
+
+            <router-link v-else :to="{ name: 'editmatch', params: { match } }">
+              Reseve a ticket
+            </router-link>
           </b-row>
         </b-col>
 
@@ -57,6 +61,11 @@
 </template>
 <script>
 export default {
+  data: () => {
+    return {
+      role: "",
+    };
+  },
   name: "MatchCard",
   props: ["matches", "type"],
 };

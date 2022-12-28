@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/valid-template-root -->
 <template>
   <div>
     <b-container>
@@ -10,28 +9,13 @@
               alt="admin avatar"
               class="avatar"
             />
-            <p>Hello, {{ this.$store.state.user.userName }}</p>
-            <h3>New managers needed to hired or fired&#128578 </h3>
-            
+            <p style="margin-top: 10px">
+              Hello, {{ this.$store.state.user.userName }}
+            </p>
+            <h2>New managers needed to hired or fired&#128578</h2>
           </b-container>
         </b-col>
         <b-col>
-        <!-- <b-container class="main" v-for="(user, index) in users" :key="index">
-      <b-row class="textRow">
-        <p>User Name: {{ user.userName }}</p>
-        <p>First Name: {{ user.firstName }}</p>
-        <p>Last Name: {{ user.lastName }}</p>
-        <p>Email: {{ user.emailAddress }}</p>
-      </b-row>
-      <div class="parent">
-        <div class="child1">
-          <b-button variant="success" @click="accept(index)">Accept</b-button>
-        </div>
-        <div class="child2">
-          <b-button variant="danger" @click="reject(index)">Reject</b-button>
-        </div>
-      </div>
-    </b-container> -->
           <table>
             <tr>
               <th>User Name</th>
@@ -72,7 +56,6 @@ export default {
     axios
       .get(URL, { headers: { Authorization: `Bearer ${TOKEN}` } })
       .then((res) => {
-        console.log("aaaa", res.data);
         const USERS = res.data;
         USERS.forEach((user) => {
           this.users.push({
@@ -83,7 +66,6 @@ export default {
             email: user.emailAddress,
           });
         });
-        console.log(this.users);
       })
       .catch((err) => {
         alert(err.message);
@@ -97,12 +79,9 @@ export default {
   },
   methods: {
     accept(index) {
-      console.log(index);
       const ID = this.users[index]._id;
-      console.log(ID)
       const URL = `http://localhost:5000/api/users/${ID}`;
       const TOKEN = this.$store.state.token;
-      console.log(TOKEN);
       axios
         .post(
           URL,
@@ -173,7 +152,6 @@ tr:nth-child(even):hover {
 }
 
 .main {
-  font-family: "Poppins", sans-serif;
   margin-top: 20px;
   margin-left: 0;
   border-radius: 20px;
@@ -213,6 +191,7 @@ tr:nth-child(even):hover {
   margin-left: 0;
 }
 .userSide {
+  text-align: center;
   margin-left: 0;
 }
 </style>

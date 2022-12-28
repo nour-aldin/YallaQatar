@@ -1,15 +1,16 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomePage from "../views/HomePage.vue";
-import SignUp from "@/components/UserManeger/SignUp.vue";
-import SignIn from "@/components/UserManeger/SignIn.vue";
-import Admin from "@/components/Pages/admin.vue";
-import Manager from "@/components/Pages/Manager.vue";
-import CreateMatch from "@/components/UI/ManagerCreateMatch.vue";
+import HomePage from "@/views/HomePage.vue";
+import SignUp from "@/components/User/UserAuthentication/SignUp.vue";
+import SignIn from "@/components/User/UserAuthentication/SignIn";
+import Admin from "@/components/User/Admin/Admin.vue";
+import Manager from "@/components/User/Manager/Manager.vue";
+import CreateMatch from "@/components/Match/CreateMatch.vue";
 import MatchCard from "@/components/UI/MatchCard.vue";
-import CreateStadium from "@/components/UI/CreateStadium.vue";
-import EditMatch from "@/components/UI/EditMatch.vue";
-import Fan from "@/components/Pages/fan.vue";
+import CreateStadium from "@/components/Stadium/CreateStadium.vue";
+import EditMatch from "@/components/Match/EditMatch.vue";
+import Fan from "@/components/User/Fan/Fan.vue";
+import EditDataUser from "@/components/User/Fan/EditDataUser.vue";
 
 Vue.use(VueRouter);
 
@@ -64,6 +65,11 @@ const routes = [
     path: "/fan",
     name: "fanfan",
     component: Fan,
+  },
+  {
+    path: "/editdatauser",
+    name: "EditDataUser",
+    component: EditDataUser,
   },
 ];
 

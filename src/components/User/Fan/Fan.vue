@@ -2,7 +2,7 @@
   <div class="main" :class="{ change_color: scrollPosition > 50 }">
     <img class="bg" src="@/assets/Icons/fan-backGround.jpg" alt="Fan" />
     <NavBar type="Fan" />
-    <b-container class="user">
+    <b-container :class="{ hideUser: scrollPosition > 50 }" class="user">
       <img
         src="@/assets/Icons/admin avatar.png"
         alt="admin avatar"
@@ -41,7 +41,6 @@ export default {
 
 <style scoped lang="scss">
 .main {
-  font-family: "Poppins", sans-serif;
   height: 100vh;
 }
 p {
@@ -59,16 +58,18 @@ p {
   height: 75px;
   border-radius: 50%;
 }
+.hideUser {
+  display: none;
+}
 
 .user {
   text-align: center;
   width: auto;
   margin-left: 0;
-  border: 1px solid white; 
+  border: 1px solid white;
   width: 30%;
   margin: 150px auto;
   border-radius: 25px;
-  /* background-color: #c0deff; */
 }
 
 .userSide {

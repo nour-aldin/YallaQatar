@@ -196,7 +196,6 @@ export default {
   min-height: 100%;
 }
 .Form {
-  font-family: "Poppins", sans-serif;
   color: rgba(0, 0, 0, 0.678);
   margin: 10rem 1.5rem;
   text-align: center;

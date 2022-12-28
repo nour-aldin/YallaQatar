@@ -4,12 +4,11 @@
       <img src="@/assets/Icons/2022-fifa-world-cup-logo.png" class="IMG" />
       <b-row>
         <select v-model="form.stadium">
-          <option :value="match.matchVenue">{{ match.matchVenue }}</option>
+          <option disabled value="">Please select Stadiam</option>
           <option v-for="(stad, index) in stadiums" :key="index">
             {{ stad }}
           </option>
         </select>
-        <!-- </b-form-group> -->
       </b-row>
       <b-row>
         <b-col>
@@ -18,10 +17,9 @@
             id="input-1"
             v-model="form.firstTeam"
             placeholder="First Team Name"
-            :value="form.firstTeam"
             required
           ></b-form-input>
-          <input type="time" class="type" v-model="form.time" />
+          <input type="time" v-model="form.time" class="type" />
         </b-col>
         <b-col>
           <b-form-input
@@ -29,10 +27,9 @@
             id="input-2"
             v-model="form.secondTeam"
             placeholder="Second Team Name"
-            :value="form.secondTeam"
             required
           ></b-form-input>
-          <input type="date" class="type" :value="form.date" />
+          <input type="date" v-model="form.date" class="type" />
         </b-col>
       </b-row>
       <b-row>
@@ -42,7 +39,6 @@
           v-model="form.referee"
           placeholder="Referee Name"
           required
-          :value="form.referee"
         ></b-form-input>
       </b-row>
       <b-row>
@@ -53,7 +49,6 @@
             v-model="form.firstLineMan"
             placeholder="First Line Man"
             required
-            :value="form.firstLineMan"
           ></b-form-input>
         </b-col>
         <b-col>
@@ -62,7 +57,6 @@
             id="input-5"
             v-model="form.secondLineMan"
             placeholder="Second Line Man"
-            :value="form.secondLineMan"
             required
           ></b-form-input>
         </b-col>
@@ -77,38 +71,24 @@
 <script>
 import axios from "axios";
 export default {
-  name: "EditMatch",
-  props: ["match"],
   mounted() {
-    console.log("sdsdsdsd", this.match);
-    this.form.firstTeam = this.match.firstTeam;
-    this.form.secondTeam = this.match.secondTeam;
-    this.form.referee = this.match.mainReferee;
-    this.form.firstLineMan = this.match.firstLinesMan;
-    this.form.secondLineMan = this.match.secondLinesMan;
-    this.form.date = this.match.date.substring(0, 10);
-    this.form.time = this.match.date.substring(11, 16);
-    this.form.stadium = this.match.matchVenue;
     const URL = "http://localhost:5000/api/stadiums";
     const TOKEN = this.$store.state.token;
     axios
       .get(URL, { headers: { Authorization: `Bearer ${TOKEN}` } })
       .then((res) => {
-        console.log(res);
         const STADIUMS = res.data;
         STADIUMS.forEach((s) => {
-          if (s.name != this.match.matchVenue) {
-            this.stadiums.push(s.name);
-          }
+          this.stadiums.push(s.name);
         });
       })
       .catch((err) => {
-        console.log(err);
+        alert(err.message);
       });
   },
+  name: "ManagerCreateMatch",
   data: () => {
     return {
-      stadiums: [],
       form: {
         firstTeam: "",
         //flag1: null,
@@ -121,6 +101,7 @@ export default {
         firstLineMan: "",
         secondLineMan: "",
       },
+      stadiums: [],
     };
   },
   methods: {
@@ -136,11 +117,10 @@ export default {
       ) {
         alert("Pleas Fill Empty Fields");
       } else {
-        const ID = this.$store.state.user._id;
-        const URL = `http://localhost:5000/api/matches/${ID}`;
+        const URL = "http://localhost:5000/api/matches";
         const TOKEN = this.$store.state.token;
         axios
-          .patch(
+          .post(
             URL,
             {
               firstTeam: this.form.firstTeam,
@@ -163,7 +143,7 @@ export default {
             this.$router.push("/manager");
           })
           .catch((err) => {
-            alert(err.message);
+            alert(err.data.message);
           });
       }
     },
@@ -176,7 +156,6 @@ export default {
   margin-top: 50px;
   border-radius: 20px;
   border: 1px solid black;
-  font-family: "Poppins", sans-serif;
   width: 60%;
   background-color: bisque;
 }
@@ -227,4 +206,10 @@ input:focus {
   margin: 15px auto;
   width: 15rem;
 }
+/* #input-group-1 {
+  margin-top: 50px !important;
+}
+#input-group-2 {
+  margin-top: 50px !important;
+} */
 </style>
