@@ -54,4 +54,9 @@ export default {
   background-color: #e5e5cb;
   transition: background-color 2s ease;
 }
+.s {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
 </style>

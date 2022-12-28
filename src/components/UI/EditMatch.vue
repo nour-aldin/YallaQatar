@@ -4,7 +4,7 @@
       <img src="@/assets/Icons/2022-fifa-world-cup-logo.png" class="IMG" />
       <b-row>
         <select v-model="form.stadium">
-          <option disabled value="">Please select Stadiam</option>
+          <option :value="match.matchVenue">{{ match.matchVenue }}</option>
           <option v-for="(stad, index) in stadiums" :key="index">
             {{ stad }}
           </option>
@@ -18,9 +18,10 @@
             id="input-1"
             v-model="form.firstTeam"
             placeholder="First Team Name"
+            :value="form.firstTeam"
             required
           ></b-form-input>
-          <input type="time" v-model="form.time" class="type" />
+          <input type="time" class="type" v-model="form.time" />
         </b-col>
         <b-col>
           <b-form-input
@@ -28,9 +29,10 @@
             id="input-2"
             v-model="form.secondTeam"
             placeholder="Second Team Name"
+            :value="form.secondTeam"
             required
           ></b-form-input>
-          <input type="date" v-model="form.date" class="type" />
+          <input type="date" class="type" :value="form.date" />
         </b-col>
       </b-row>
       <b-row>
@@ -40,6 +42,7 @@
           v-model="form.referee"
           placeholder="Referee Name"
           required
+          :value="form.referee"
         ></b-form-input>
       </b-row>
       <b-row>
@@ -50,6 +53,7 @@
             v-model="form.firstLineMan"
             placeholder="First Line Man"
             required
+            :value="form.firstLineMan"
           ></b-form-input>
         </b-col>
         <b-col>
@@ -58,6 +62,7 @@
             id="input-5"
             v-model="form.secondLineMan"
             placeholder="Second Line Man"
+            :value="form.secondLineMan"
             required
           ></b-form-input>
         </b-col>
@@ -72,7 +77,18 @@
 <script>
 import axios from "axios";
 export default {
+  name: "EditMatch",
+  props: ["match"],
   mounted() {
+    console.log("sdsdsdsd", this.match);
+    this.form.firstTeam = this.match.firstTeam;
+    this.form.secondTeam = this.match.secondTeam;
+    this.form.referee = this.match.mainReferee;
+    this.form.firstLineMan = this.match.firstLinesMan;
+    this.form.secondLineMan = this.match.secondLinesMan;
+    this.form.date = this.match.date.substring(0, 10);
+    this.form.time = this.match.date.substring(11, 16);
+    this.form.stadium = this.match.matchVenue;
     const URL = "http://localhost:5000/api/stadiums";
     const TOKEN = this.$store.state.token;
     axios
@@ -81,16 +97,18 @@ export default {
         console.log(res);
         const STADIUMS = res.data;
         STADIUMS.forEach((s) => {
-          this.stadiums.push(s.name);
+          if (s.name != this.match.matchVenue) {
+            this.stadiums.push(s.name);
+          }
         });
       })
       .catch((err) => {
         console.log(err);
       });
   },
-  name: "ManagerCreateMatch",
   data: () => {
     return {
+      stadiums: [],
       form: {
         firstTeam: "",
         //flag1: null,
@@ -103,7 +121,6 @@ export default {
         firstLineMan: "",
         secondLineMan: "",
       },
-      stadiums: [],
     };
   },
   methods: {
@@ -119,11 +136,11 @@ export default {
       ) {
         alert("Pleas Fill Empty Fields");
       } else {
-        const URL = "http://localhost:5000/api/matches";
+        const ID = this.$store.state.user._id;
+        const URL = `http://localhost:5000/api/matches/${ID}`;
         const TOKEN = this.$store.state.token;
-        console.log(TOKEN);
         axios
-          .post(
+          .patch(
             URL,
             {
               firstTeam: this.form.firstTeam,
@@ -132,7 +149,7 @@ export default {
               date: this.form.date,
               mainReferee: this.form.referee,
               firstLinesMan: this.form.firstLineMan,
-              secondLinesMan: this.form.secondLineMan
+              secondLinesMan: this.form.secondLineMan,
             },
             {
               headers: {
@@ -142,14 +159,12 @@ export default {
             }
           )
           .then((res) => {
+            alert(res.data.message);
             this.$router.push("/manager");
-            console.log(res);
           })
           .catch((err) => {
-            console.log(err);
+            alert(err.message);
           });
-        console.log(this.form.date);
-        console.table(this.form);
       }
     },
   },
@@ -212,10 +227,4 @@ input:focus {
   margin: 15px auto;
   width: 15rem;
 }
-/* #input-group-1 {
-  margin-top: 50px !important;
-}
-#input-group-2 {
-  margin-top: 50px !important;
-} */
 </style>

@@ -8,6 +8,8 @@ import Manager from "@/components/Pages/Manager.vue";
 import CreateMatch from "@/components/UI/ManagerCreateMatch.vue";
 import MatchCard from "@/components/UI/MatchCard.vue";
 import CreateStadium from "@/components/UI/CreateStadium.vue";
+import EditMatch from "@/components/UI/EditMatch.vue";
+import Fan from "@/components/Pages/fan.vue";
 
 Vue.use(VueRouter);
 
@@ -51,6 +53,17 @@ const routes = [
     path: "/createstadium",
     name: "createstadium",
     component: CreateStadium,
+  },
+  {
+    path: "/editmatch",
+    name: "editmatch",
+    component: EditMatch,
+    props: true,
+  },
+  {
+    path: "/fan",
+    name: "fanfan",
+    component: Fan,
   },
 ];
 

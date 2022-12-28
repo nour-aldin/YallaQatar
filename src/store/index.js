@@ -52,18 +52,15 @@ export default new Vuex.Store({
             password: user.password,
           })
           .then((res) => {
-            console.log(res);
             const token = res.data.token;
             localStorage.setItem("token", token);
             axios.defaults.headers.common["Authorization"] = token;
-            console.table("res.user =", res.data.user);
             commit("auth_success", token, user);
             this.state.user = res.data.user;
-            console.table("state.user =", this.state.user);
             resolve(res);
           })
           .catch((err) => {
-            console.log(err);
+            alert(err.response.data.message);
             commit("auth_error");
             localStorage.removeItem("token");
             reject(err);
@@ -71,7 +68,6 @@ export default new Vuex.Store({
       });
     },
     async signUp({ commit }, user) {
-      console.table(user);
       return new Promise((resolve, reject) => {
         this.commit("auth_request");
         axios
@@ -95,6 +91,7 @@ export default new Vuex.Store({
             resolve(res);
           })
           .catch((err) => {
+            alert(err.response.data.message);
             commit("auth_error");
             localStorage.removeItem("token");
             reject(err);

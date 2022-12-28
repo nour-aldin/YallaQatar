@@ -67,7 +67,8 @@ export default {
         alert("Please Fill all inputs ");
       } else {
         const URL = "http://localhost:5000/api/stadiums";
-        const TOKEN = this.$store.state.TOKEN;
+        const TOKEN = this.$store.state.token;
+        console.log(TOKEN);
         axios
           .post(
             URL,
@@ -84,7 +85,8 @@ export default {
             }
           )
           .then((res) => {
-            alert(res.message);
+            alert(res.data.message);
+            this.$router.push("/manager");
           })
           .catch((err) => {
             alert(err.message);

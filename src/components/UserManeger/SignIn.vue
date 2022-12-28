@@ -86,8 +86,8 @@ export default {
             this.$router.push("/admin");
           } else if (ROLE == "manager" && Approved) {
             this.$router.push("/manager");
-          } else {
-            this.$router.push("/home");
+          } else if (ROLE == "fan") {
+            this.$router.push("/fan");
           }
         })
         .catch((err) => {

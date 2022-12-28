@@ -1,12 +1,14 @@
 <template>
-  <div>
+  <b-container fluid class="main">
     <NavBar type="Manager" :user="this.user" />
-  </div>
+    <ManagerDetails />
+  </b-container>
 </template>
 
 <script>
 // @ is an alias to /src
 import NavBar from "../UI/NavBar.vue";
+import ManagerDetails from "../UI/ManagerDetails.vue";
 export default {
   mounted() {
     this.user = this.$store.state.user;
@@ -14,6 +16,7 @@ export default {
   name: "ManagerPage",
   components: {
     NavBar,
+    ManagerDetails,
   },
   data: () => {
     return {
@@ -23,4 +26,8 @@ export default {
   methods: {},
 };
 </script>
-<style scoped></style>
+<style scoped>
+.main {
+  background-color: #E98EAD;
+}
+</style>
