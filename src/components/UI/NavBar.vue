@@ -9,7 +9,6 @@
         <b-nav-item href="/" class="navItems">Home</b-nav-item>
         <b-nav-item href="#" class="navItems">Groups</b-nav-item>
         <b-nav-item href="#" class="navItems">Matches</b-nav-item>
-        <b-nav-item href="#" class="navItems">History</b-nav-item>
         <b-nav-item href="#" class="navItems">Booking</b-nav-item>
         <b-nav-item href="/signin" class="navItems">Sign in</b-nav-item>
       </b-navbar-nav>

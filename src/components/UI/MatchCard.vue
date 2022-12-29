@@ -23,16 +23,11 @@
             <p>VS</p>
           </b-row>
           <b-row>
-            <keep-alive v-if="type == 'Manager'"><router-link
-              
-              :to="{ name: 'editmatch', params: { match } }"
-            >
+            <a v-if="type == 'Manager'" @click="deleteSeat(match)">
               Edit Match
-            </router-link></keep-alive>
+            </a>
 
-            <keep-alive v-else><router-link  :to="{ name: 'SeatDetails', params: { match } }">
-              Match details
-            </router-link></keep-alive>
+            <a v-else @click="fanMatchDetails(match)">Match details</a>
           </b-row>
         </b-col>
 
@@ -65,6 +60,28 @@ export default {
     return {
       role: "",
     };
+  },
+  methods: {
+    fanMatchDetails(match) {
+      this.$store
+        .dispatch("fanMatchDetails", { match })
+        .then(() => {
+          this.$router.push("/seatDetails");
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    },
+    deleteSeat(match) {
+      this.$store
+        .dispatch("fanMatchDetails", { match })
+        .then(() => {
+          this.$router.push("/seatDetails");
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    },
   },
   name: "MatchCard",
   props: ["matches", "type"],

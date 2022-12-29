@@ -13,6 +13,8 @@ import Fan from "@/components/User/Fan/Fan.vue";
 import EditDataUser from "@/components/User/Fan/EditDataUser.vue";
 import SeatDetails from "@/components/Reservation/SeatDetails.vue";
 
+import PayCard from "@/components/UI/PayCard.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -77,6 +79,11 @@ const routes = [
     name: "SeatDetails",
     component: SeatDetails,
     props: true,
+  },
+  {
+    path: "/payment",
+    name: "PayCard",
+    component: PayCard,
   },
 ];
 
