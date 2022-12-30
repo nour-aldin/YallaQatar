@@ -128,33 +128,51 @@ export default {
       let birthDate = this.user.birthDate;
       let nationality = this.user.nationality;
       let gender = this.user.gender;
-      const id = this.$store.state.user._id;
-      const URL = `http://localhost:5000/users/${id}`;
-      const TOKEN = this.$store.state.token;
-      axios
-        .patch(
-          URL,
-          {
-            firstName: firstName,
-            secondName: secondName,
-            password: password,
-            birthDate: birthDate,
-            nationality: nationality,
-            gender: gender,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${TOKEN}`,
-            },
-          }
-        )
+      this.$store
+        .dispatch("editUserData", {
+          firstName,
+          secondName,
+          password,
+          birthDate,
+          nationality,
+          gender,
+        })
         .then((res) => {
-          alert(res.message);
+          alert(res.data.message);
+          this.$forceUpdate();
+          this.$router.push("/fan");
         })
         .catch((err) => {
           alert(err.message);
         });
+      // const id = this.$store.state.user._id;
+      // const URL = `http://localhost:5000/api/users/${id}`;
+      // const TOKEN = this.$store.state.token;
+      // axios
+      //   .put(
+      //     URL,
+      //     {
+      //       firstName: firstName,
+      //       secondName: secondName,
+      //       password: password,
+      //       birthDate: birthDate,
+      //       nationality: nationality,
+      //       gender: gender,
+      //     },
+      //     {
+      //       headers: {
+      //         "Content-Type": "application/json",
+      //         Authorization: `Bearer ${TOKEN}`,
+      //       },
+      //     }
+      //   )
+      //   .then((res) => {
+      //     alert(res.data.message);
+      //     this.$router.push("/fan");
+      //   })
+      //   .catch((err) => {
+      //     alert(err.message);
+      //   });
     },
     onReset(event) {
       event.preventDefault();

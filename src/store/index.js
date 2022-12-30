@@ -63,6 +63,13 @@ export default new Vuex.Store({
     delete_seat(state, inf) {
       state.seateStatue.seatsStatus[inf.index][inf.spr] = 0;
     },
+    edit_user(state, user) {
+      state.user.firstName = user.firstName;
+      state.user.lastName = user.secondName;
+      state.user.birthDate = user.birthDate;
+      state.user.nationality = user.nationality;
+      state.user.gender = user.gender;
+    },
   },
   actions: {
     async login({ commit }, user) {
@@ -169,6 +176,7 @@ export default new Vuex.Store({
     setRowSeat({ commit }, inf) {
       commit("set_RowSeat", inf);
     },
+
     deleteSeat({ commit }, inf) {
       return new Promise((resolve, reject) => {
         const ID = this.state.seateStatue._id;
@@ -194,6 +202,38 @@ export default new Vuex.Store({
           })
           .catch((err) => {
             console.log(err);
+            reject(err);
+          });
+      });
+    },
+    editUserData({ commit }, user) {
+      return new Promise((resolve, reject) => {
+        const id = this.state.user._id;
+        const URL = `http://localhost:5000/api/users/${id}`;
+        const TOKEN = this.state.token;
+        axios
+          .put(
+            URL,
+            {
+              firstName: user.firstName,
+              secondName: user.secondName,
+              password: user.password,
+              birthDate: user.birthDate,
+              nationality: user.nationality,
+              gender: user.gender,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${TOKEN}`,
+              },
+            }
+          )
+          .then((res) => {
+            commit("edit_user", user);
+            resolve(res);
+          })
+          .catch((err) => {
             reject(err);
           });
       });
