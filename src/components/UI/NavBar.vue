@@ -63,7 +63,7 @@
           >Matches</b-nav-item
         >
         <b-nav-item to="/editdatauser" class="navItems">Edit user</b-nav-item>
-        <b-nav-item href="#" class="navItems">Booking</b-nav-item>
+        <b-nav-item to="/cancelticket" class="navItems">canel ticket</b-nav-item>
         <b-nav-item href="/signin" class="navItems"
           ><p class="h3 mb-0">
             <b-icon icon="box-arrow-right" class="icon"></b-icon></p

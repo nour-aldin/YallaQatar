@@ -24,6 +24,7 @@ export default new Vuex.Store({
     seateStatue: null,
     row: null,
     seat: null,
+    tickets: [],
   },
   getters: {
     isLoggedIn: (state) => !!state.token,
@@ -53,6 +54,7 @@ export default new Vuex.Store({
     update_seats(state, data) {
       state.seateStatue.seatsStatus[data.info.index][data.info.spr] =
         data.ticketNumber;
+      state.tickets.push(data.ticketNumber);
     },
     set_RowSeat(state, data) {
       state.row = data.index;
@@ -103,11 +105,12 @@ export default new Vuex.Store({
             role: user.role,
           })
           .then((res) => {
+            console.log("res", res);
             const token = res.data.token;
-            const user = res.data.user;
+            const User = res.data.user;
             localStorage.setItem("token", token);
             axios.defaults.headers.common["Authorization"] = token;
-            commit("auth_success", { token, user });
+            commit("auth_success", { token, User });
             resolve(res);
           })
           .catch((err) => {

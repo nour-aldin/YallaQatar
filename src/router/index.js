@@ -12,6 +12,7 @@ import EditMatch from "@/components/Match/EditMatch.vue";
 import Fan from "@/components/User/Fan/Fan.vue";
 import EditDataUser from "@/components/User/Fan/EditDataUser.vue";
 import SeatDetails from "@/components/Reservation/SeatDetails.vue";
+import CancelTicket from "@/components/User/Fan/CancelTicket.vue";
 
 import PayCard from "@/components/UI/PayCard.vue";
 
@@ -84,6 +85,11 @@ const routes = [
     path: "/payment",
     name: "PayCard",
     component: PayCard,
+  },
+  {
+    path: "/cancelticket",
+    name: "CancelTicket",
+    component: CancelTicket,
   },
 ];
 

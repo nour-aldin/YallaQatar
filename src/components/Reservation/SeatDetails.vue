@@ -111,21 +111,8 @@ export default {
   },
   methods: {
     reserveSeat(index, spr) {
-      if (
-        this.$store.state.user.role == "manager" &&
-        this.$store.state.seateStatue.seatsStatus[index][spr] == "0"
-      ) {
-        alert("Seat Already Empty");
-      } else if (
-        this.$store.state.user.role == "manager" &&
-        this.$store.state.seateStatue.seatsStatus[index][spr] != "0"
-      ) {
-        this.$store
-          .dispatch("deleteSeat", { index, spr })
-          .then(this.$forceUpdate())
-          .catch((err) => {
-            alert(err.message);
-          });
+      if (this.$store.state.user.role == "manager") {
+        return;
       } else if (
         this.$store.state.seateStatue.seatsStatus[index][spr] == "0" &&
         this.$store.state.user.role == "fan"
@@ -135,7 +122,7 @@ export default {
         this.showPayment = true;
         this.$store
           .dispatch("setRowSeat", { index, spr })
-          .then()
+          .then(() => {})
           .catch((err) => {
             alert(err.message);
           });
@@ -157,6 +144,7 @@ export default {
         this.$store
           .dispatch("updateSeats", { index, spr })
           .then(() => {
+            this.showPayment = false;
             this.$forceUpdate();
           })
           .catch((err) => {

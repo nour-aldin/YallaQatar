@@ -158,9 +158,13 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      this.$store
-        .dispatch("signUp", { ...this.form })
-        .then(() => this.$router.push("/home"));
+      this.$store.dispatch("signUp", { ...this.form }).then(() => {
+        if (this.$store.state.user.role == "fan") {
+          this.$router.push("/fan");
+        } else {
+          alert("Wait for manger to approve you ");
+        }
+      });
     },
     onReset(event) {
       event.preventDefault();
