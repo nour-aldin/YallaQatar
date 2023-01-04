@@ -73,14 +73,14 @@ export default {
         });
     },
     deleteSeat(match) {
-      this.$store
-        .dispatch("fanMatchDetails", { match })
-        .then(() => {
-          this.$router.push("/seatDetails");
-        })
-        .catch((err) => {
-          alert(err.message);
-        });
+      // this.$store
+      //   .dispatch("fanMatchDetails", { match })
+      //   .then(() => {
+      //     this.$router.push("/seatDetails");
+      //   })
+      //   .catch((err) => {
+      //     alert(err.message);
+      //   });
     },
   },
   name: "MatchCard",

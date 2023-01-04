@@ -156,7 +156,9 @@ export default {
         )
         .then((res) => {
           alert(res.data.message);
+          console.log(this.users)
           this.users.splice(index, 1);
+          console.log(this.users)
         })
         .catch((err) => {
           alert(err.message);

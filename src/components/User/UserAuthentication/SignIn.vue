@@ -88,6 +88,8 @@ export default {
             this.$router.push("/manager");
           } else if (ROLE == "fan") {
             this.$router.push("/fan");
+          } else {
+            alert("Wait for manger to approve you ");
           }
         })
         .catch((err) => {

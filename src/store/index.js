@@ -89,7 +89,7 @@ export default new Vuex.Store({
             resolve(res);
           })
           .catch((err) => {
-            alert(err.response.data.message);
+            alert(err.message);
             commit("auth_error");
             localStorage.removeItem("token");
             reject(err);
@@ -114,14 +114,24 @@ export default new Vuex.Store({
           .then((res) => {
             console.log("res", res);
             const token = res.data.token;
-            const User = res.data.user;
+            const User = {
+              userName: user.userName,
+              password: user.password,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              birthDate: user.birthDate,
+              gender: user.gender,
+              nationality: user.nationality,
+              emailAddress: user.email,
+              role: user.role,
+            };
             localStorage.setItem("token", token);
             axios.defaults.headers.common["Authorization"] = token;
             commit("auth_success", { token, User });
             resolve(res);
           })
           .catch((err) => {
-            alert(err.response.data.message);
+            alert(err.response.message);
             commit("auth_error");
             localStorage.removeItem("token");
             reject(err);
